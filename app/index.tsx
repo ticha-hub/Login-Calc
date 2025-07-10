@@ -65,7 +65,7 @@ export default function LoginScreen() {
             placeholder="Enter your username"
             value={username}
             onChangeText={setUsername}
-            className="flex-1 ml-3 text-base"
+            className="flex-1 ml-3 text-base text-black"
             placeholderTextColor="#aaa"
           />
         </View>
@@ -79,7 +79,7 @@ export default function LoginScreen() {
             value={password}
             onChangeText={setPassword}
             secureTextEntry={secure}
-            className="flex-1 ml-3 text-base"
+            className="flex-1 ml-3 text-base text-black"
             placeholderTextColor="#aaa"
           />
 
