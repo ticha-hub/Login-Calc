@@ -10,14 +10,14 @@ export default function LoginScreen() {
   const [error, setError] = useState('');
   const [secure, setSecure] = useState(true);
 
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeAnimation = useRef(new Animated.Value(0)).current;
 
   //animating the form (fading in) as it appears on app load
 
   useEffect(() => {
-    Animated.timing(fadeAnim, {
+    Animated.timing(fadeAnimation, {
       toValue: 1,
-      duration: 600,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
   }, []);
@@ -27,11 +27,20 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     if (!username.trim()) {
+      //blank uname
       setError('Please enter your username');
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)){
+      //invalid chars
+      setError('Only letters numbers and underscores allowed in username')
+    } else if (username.length < 4){
+      //to short
+      setError('Username must be at least 4 characters');
     } else if (!password.trim()) {
+      //blank pass
       setError('Please enter your password');
-    } else if (password.length < 4) {
-      setError('Password must be at least 4 characters');
+    } else if (password.length < 8) {
+      //shortpass
+      setError('Password must be at least 8 characters');
     } else {
       setError('');
       router.push({ pathname: '/welcome', params: { username } });
@@ -42,9 +51,8 @@ export default function LoginScreen() {
   return (
     <Animated.View
       className="flex-1 justify-center items-center bg-gradient-to-br from-indigo-100 to-white px-6"
-      style={{ opacity: fadeAnim }}
+      style={{ opacity: fadeAnimation }}
     >
-
 
       <View className="w-full bg-white rounded-xl p-6 shadow-md space-y-4">
 

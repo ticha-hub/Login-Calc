@@ -13,15 +13,19 @@ export default function AddNumbersScreen() {
     const num2 = parseFloat(b);
     
     if (!a.trim()) {
+        setResult(null);
         setError('Please enter first number');
     } else if (!b.trim()) {
+        setResult(null);
         setError('Please enter second number');
     } else {
-        setError('');
+        
         if (!isNaN(num1) && !isNaN(num2)) {
+            setError('');
             setResult(num1 + num2);
         } else {
             setResult(null);
+            setError('Only numbers are allowed');
     }
     }
 
@@ -66,6 +70,13 @@ export default function AddNumbersScreen() {
           />
         </View>
 
+        {/* sum display */}
+        {result !== null && (
+          <View className="mt-4 items-center">
+            <Text className="text-2xl font-bold text-indigo-900 mb-5">Result= {result}</Text>
+          </View>
+        )}
+
         {/* Calculate Btn */}
 
         <Pressable
@@ -75,13 +86,6 @@ export default function AddNumbersScreen() {
           <Text className="text-white text-center font-semibold text-lg">Calculate</Text>
         </Pressable>
 
-        {/* sum display */}
-        {result !== null && (
-          <View className="mt-4 items-center">
-            <Text className="text-lg text-gray-700">Result:</Text>
-            <Text className="text-2xl font-bold text-indigo-900">{result}</Text>
-          </View>
-        )}
       </View>
     </View>
   );
